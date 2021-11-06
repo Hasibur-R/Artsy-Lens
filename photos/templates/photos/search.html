@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+  <style>
+    .image-thumbnail {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    body {
+      background: #000000;
+    }
+
+    @font-face {
+      font-family: last-paradise;
+      src: url("../../../static/svn_last_paradise/SVN-Last Paradise.ttf");
+    }
+
+    :root {
+      --trans: all 0.3s linear;
+    }
+
+    /*header start*/
+    header {
+      padding: 20px 0;
+      position: fixed;
+      width: 100%;
+      height: 100px;
+      left: 0;
+      top: 0;
+      background: #000000;
+      z-index: 9999;
+      opacity: 0.8;
+      height: 80px;
+    }
+
+    header .logo a {
+      font-size: 35px;
+      font-family: 'Gluten', cursive;
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--trans);
+      padding-right: 50px;
+      color: #ffffff;
+
+    }
+
+    header .logo a:hover {
+      color: #18c5a3;
+
+    }
+
+    header .container ul li a {
+      text-decoration: none;
+      font-size: 20px;
+      color: #ffffff;
+      transition: var(--trans);
+      border-bottom: 2px solid transparent;
+    }
+
+    header .container ul li a:hover {
+      color: #18c5a3;
+      border-bottom: 2px solid #18c5a3;
+    }
+
+    header .drop-btn {
+      opacity: 0.8;
+    }
+
+    .log_sign button a {
+      text-decoration: none;
+      color: #ffff;
+      transition: var(--trans);
+    }
+
+    .log_sign button:hover a {
+      color: #000000;
+    }
+
+    /*header end*/
+    .card img{
+      height: 350px;
+     
+    }
+
+    /*footerpart start*/
+    footer {
+      background: #212529;
+      margin-top: 100px;
+
+    }
+
+    footer hr {
+      color: #ffff;
+    }
+
+    footer .footer-internal {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding-top: 70px;
+      padding-bottom: 30px;
+      display: grid;
+      grid-template-columns: 3fr 3fr 2fr 2fr;
+      grid-template-areas: "part1 part2 part3 part4";
+
+    }
+
+    footer h2 {
+      color: #ffff;
+      font-size: 20px;
+      padding-bottom: 30px;
+      font-weight: 700;
+    }
+
+    footer p {
+      color: #8a8a8a;
+      font-size: 14px;
+    }
+
+    footer .footer-internal .part1 {
+      grid-area: part1;
+    }
+
+    footer .footer-internal .part1 img {
+      width: 140px;
+      height: 40px;
+    }
+
+    footer .footer-internal .part2 {
+      grid-area: part2;
+    }
+
+    footer .footer-internal .part2 img {
+      height: 50px;
+      width: 180px;
+    }
+
+    footer .footer-internal .part3 {
+      grid-area: part3;
+    }
+
+    footer .footer-internal .part3 a {
+      text-decoration: none;
+      color: #8a8a8a;
+    }
+
+    footer .footer-internal .part4 {
+      grid-area: part4;
+    }
+
+    footer .final-part p {
+      text-align: center;
+      color: #ffff;
+      padding-bottom: 20px;
+    }
+
+    /*footer part end*/
+  </style>
+</head>
+
+<body>
+
+  <!--header start-->
+  <header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <div class="logo">
+          <a href="{% url 'gallery' %}" class="d-flex align-items-center mb-2 mb-lg-0  text-decoration-none">
+            Artsy Lens
+          </a>
+        </div>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{% url 'gallery' %}" class="nav-link px-2 ">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Catagory
+            </a>
+            <ul class="dropdown-menu drop-btn bg-dark" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="{% url 'gallery' %}">All</a></li>
+              {% for category in categories %}
+              <li><a class="dropdown-item" href="{% url 'gallery' %}?category={{category.name}}">{{category.name}}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          <li><a href="{% url 'upload' %}" class="nav-link px-2 ">Upload</a></li>
+          <li><a href="{% url 'about' %}" class="nav-link px-2 ">About</a></li>
+        </ul>
+
+        <form class="d-flex">
+          <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+        <div class="text-end">
+          <div class="log_sign">
+            <button type="button" class="btn btn-outline-light me-2 sign_in"><a href="{% url 'logout' %}">Log
+                Out</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!--header end-->
+
+
+  <div class="container" style="margin-top: 100px;">
+    <div class="row">
+      
+
+          {% for photo in photos %}
+          <div class="col-md-4">
+            <div class="card my-2 bg-dark">
+              <img class="image-thumbnail" src="{{photo.image.url}}">
+
+              <div class="card-body">
+                <small class="text-light">Category: {{photo.category.name}}</small>
+                <br>
+                <small class="text-light">Title: {{photo.photo_title}}</small>
+              </div>
+              <a href="{% url 'photo' photo.id %}" class="btn btn-outline-light btn-sm m-1">View</a>
+            </div>
+          </div>
+          {% empty %}
+          <h3>No photos...</h3>
+          {% endfor %}
+        
+      
+    </div>
+  </div>
+
+
+
+
+  <!--Footer part start-->
+  <footer>
+    <div class="footer-internal">
+      <div class="part1">
+        <h2>Our official App</h2>
+        <p>Coming Soon</p>
+        <div class="part1-img">
+          <img src="../../../static/images/play-store.png" alt="">
+          <img src="../../../static/images/app-store.png" alt="">
+        </div>
+      </div>
+      <div class="part2">
+        <h2>Our Partner</h2>
+        <div class="part2-img">
+          <img src="../../../static/images/logo-white.png" alt="">
+        </div>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis, nulla ipsam! Quis et ex</p>
+      </div>
+      <div class="part3">
+        <h2>Follow Us</h2>
+        <p><a href="https://www.facebook.com/" target="_blank"> Facebook</a></p>
+        <p><a href=" https://twitter.com/" target="_blank"> Twiter</a></p>
+        <p><a href="https://www.instagram.com/" target="_blank"> Instagram</a></p>
+        <p><a href="https://www.youtube.com/" target="_blank"> Youtube</a></p>
+      </div>
+      <div class="part4">
+        <!--<div class="heading-part" style="margin-bottom: 25px;">
+          <a href="./about.html" style="text-decoration:none; color: #ffff; font-size: 20px; padding-bottom: 30px; font-weight: 700;">About Us</a>
+        </div>-->
+        <div class="under-part">
+          <h2>Contact Us</h2>
+          <p>Phone:01516051683</p>
+          <p>Email: admin.artsy@gmail.com</p>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="final-part">
+      <p>Copyright 2021-Artsy Lens</p>
+    </div>
+  </footer>
+  <!--Footer part start-->
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>
